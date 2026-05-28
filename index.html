@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Маргарита Раганян — Таро, Нумерология, МАК</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:        #f0ecf8;
+  --bg2:       #e8e1f5;
+  --bg3:       #faf8ff;
+  --gold:      #9b6e2f;
+  --gold-l:    #c49a4e;
+  --gold-dim:  rgba(155,110,47,0.1);
+  --purple:    #6b4fa0;
+  --purple-l:  #9b7dcc;
+  --purple-dim:rgba(107,79,160,0.1);
+  --cream:     #2d1f4e;
+  --muted:     rgba(45,31,78,0.55);
+  --border:    rgba(107,79,160,0.18);
+  --card:      rgba(255,255,255,0.72);
+  --card-border:rgba(107,79,160,0.15);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--cream);
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ── ANIMATED BG BLOBS ── */
+.blobs {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.45;
+  animation: blobFloat var(--bd,18s) ease-in-out infinite alternate;
+}
+.blob1 { width:380px; height:380px; background:#cdb8f0; top:-80px; left:-80px; --bd:20s; }
+.blob2 { width:300px; height:300px; background:#f4c6e8; top:30%; right:-100px; --bd:15s; animation-delay:-5s; }
+.blob3 { width:260px; height:260px; background:#b8d4f5; bottom:15%; left:10%; --bd:22s; animation-delay:-8s; }
+.blob4 { width:200px; height:200px; background:#f0d9b5; bottom:5%; right:5%; --bd:17s; animation-delay:-3s; }
+
+@keyframes blobFloat {
+  0%   { transform: translate(0,0) scale(1); }
+  33%  { transform: translate(30px,-20px) scale(1.05); }
+  66%  { transform: translate(-20px,25px) scale(0.97); }
+  100% { transform: translate(15px,10px) scale(1.02); }
+}
+
+/* ── FLOATING RUNES ── */
+.runes {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.rune {
+  position: absolute;
+  font-size: var(--rs,18px);
+  color: var(--purple);
+  opacity: 0;
+  animation: runeFall var(--rd,8s) linear infinite;
+  animation-delay: var(--delay,0s);
+  user-select: none;
+}
+@keyframes runeFall {
+  0%   { opacity:0;   transform: translateY(-20px) rotate(0deg); }
+  10%  { opacity: var(--ro,0.18); }
+  90%  { opacity: var(--ro,0.18); }
+  100% { opacity:0;   transform: translateY(100vh) rotate(360deg); }
+}
+
+/* ── SPARKLES ── */
+.sparkle-field {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.sparkle {
+  position: absolute;
+  width: var(--sw,6px);
+  height: var(--sw,6px);
+  opacity: 0;
+  animation: sparklePop var(--sd,3s) ease-in-out infinite;
+  animation-delay: var(--sdelay,0s);
+}
+.sparkle::before, .sparkle::after {
+  content:'';
+  position: absolute;
+  background: var(--gold-l);
+  border-radius: 2px;
+}
+.sparkle::before { width:100%; height:2px; top:50%; transform:translateY(-50%); }
+.sparkle::after  { height:100%; width:2px; left:50%; transform:translateX(-50%); }
+
+@keyframes sparklePop {
+  0%,100% { opacity:0; transform:scale(0) rotate(0deg); }
+  50%      { opacity:0.7; transform:scale(1) rotate(45deg); }
+}
+
+/* ── WRAPPER ── */
+.wrapper {
+  position: relative;
+  z-index: 1;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 20px 70px;
+}
+
+/* ── HERO ── */
+.hero {
+  text-align: center;
+  padding: 56px 0 36px;
+}
+
+/* Orbiting ring */
+.orbit-container {
+  width: 140px; height: 140px;
+  margin: 0 auto 26px;
+  position: relative;
+}
+.orbit-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1.5px solid transparent;
+  border-top-color: var(--gold-l);
+  border-right-color: rgba(155,110,47,0.3);
+  animation: spinRing 8s linear infinite;
+}
+.orbit-ring2 {
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  border: 1px dashed rgba(107,79,160,0.35);
+  animation: spinRing 14s linear infinite reverse;
+}
+@keyframes spinRing { to { transform:rotate(360deg); } }
+
+/* Orbit dot */
+.orbit-dot {
+  position: absolute;
+  width: 8px; height: 8px;
+  background: var(--gold-l);
+  border-radius: 50%;
+  top: -4px; left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 8px var(--gold-l);
+  animation: spinRing 8s linear infinite;
+}
+
+.avatar-inner {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 96px; height: 96px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid rgba(255,255,255,0.75);
+  box-shadow: 0 8px 32px rgba(107,79,160,0.25), 0 0 0 2px rgba(107,79,160,0.15);
+}
+.avatar-inner img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+/* Pulse ring */
+.pulse-ring {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  width: 100px; height: 100px;
+  border-radius: 50%;
+  border: 1px solid rgba(107,79,160,0.3);
+  animation: pulseRing 2.5s ease-out infinite;
+}
+@keyframes pulseRing {
+  0%   { transform:translate(-50%,-50%) scale(0.9); opacity:0.5; }
+  100% { transform:translate(-50%,-50%) scale(1.6); opacity:0; }
+}
+
+.hero-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 38px;
+  font-weight: 300;
+  letter-spacing: 2px;
+  color: var(--cream);
+  line-height: 1.1;
+  margin-bottom: 6px;
+  animation: fadeSlide 0.8s ease both;
+}
+.hero-name em { color: var(--purple); font-style: italic; }
+
+.hero-tagline {
+  font-size: 10.5px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 22px;
+  animation: fadeSlide 0.8s 0.1s ease both;
+}
+
+@keyframes fadeSlide {
+  from { opacity:0; transform:translateY(14px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+.divider {
+  display:flex; align-items:center; gap:12px; margin:18px 0;
+}
+.divider-line {
+  flex:1; height:1px;
+  background: linear-gradient(90deg,transparent,var(--purple-l),transparent);
+  opacity: 0.4;
+}
+.divider-sym { color:var(--purple-l); font-size:13px; opacity:0.7; }
+
+.hero-desc {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  line-height: 1.75;
+  color: var(--muted);
+  font-style: italic;
+  animation: fadeSlide 0.8s 0.2s ease both;
+}
+
+/* ── BADGES ── */
+.badges {
+  display:flex; flex-wrap:wrap; gap:8px;
+  justify-content:center; margin:22px 0;
+  animation: fadeSlide 0.8s 0.25s ease both;
+}
+.badge {
+  background: rgba(255,255,255,0.6);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 10.5px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--purple);
+  backdrop-filter: blur(4px);
+  transition: transform 0.2s, background 0.2s;
+}
+.badge:hover { transform:translateY(-2px); background:rgba(255,255,255,0.85); }
+
+/* ── GLASS CARD ── */
+.glass-card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  padding: 24px 22px;
+  margin-bottom: 28px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 24px rgba(107,79,160,0.08);
+  animation: fadeSlide 0.8s 0.3s ease both;
+}
+.glass-card p {
+  font-size: 14px; line-height: 1.85;
+  color: var(--muted); margin-bottom: 12px;
+}
+.glass-card p:last-of-type { margin-bottom:0; }
+.glass-card strong { color:var(--cream); font-weight:500; }
+
+/* Stats */
+.stats-row {
+  display: grid; grid-template-columns:1fr 1fr 1fr;
+  gap:12px; margin-top:20px;
+}
+.stat-item { text-align:center; }
+.stat-num {
+  font-family:'Cormorant Garamond',serif;
+  font-size:30px; color:var(--purple-l);
+  display:block; line-height:1; margin-bottom:4px;
+  animation: countUp 1s ease both;
+}
+@keyframes countUp {
+  from { opacity:0; transform:scale(0.7); }
+  to   { opacity:1; transform:scale(1); }
+}
+.stat-label {
+  font-size:10px; letter-spacing:1.5px;
+  text-transform:uppercase; color:var(--muted);
+}
+
+/* ── SECTION TITLE ── */
+.section-title {
+  font-family:'Cormorant Garamond',serif;
+  font-size:23px; font-weight:300;
+  letter-spacing:3px; text-transform:uppercase;
+  color:var(--purple); text-align:center;
+  margin-bottom:18px;
+}
+
+/* ── TABS ── */
+.tabs-wrap {
+  overflow-x:auto; -webkit-overflow-scrolling:touch;
+  margin-bottom:18px; scrollbar-width:none;
+}
+.tabs-wrap::-webkit-scrollbar { display:none; }
+.tabs { display:flex; gap:7px; width:max-content; padding-bottom:4px; }
+.tab-btn {
+  background: rgba(255,255,255,0.5);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 7px 16px;
+  font-family:'Jost',sans-serif;
+  font-size: 11px; letter-spacing:1.5px;
+  text-transform:uppercase;
+  color: var(--muted); cursor:pointer;
+  transition: all 0.25s; white-space:nowrap;
+  backdrop-filter:blur(4px);
+}
+.tab-btn.active {
+  background: var(--purple);
+  border-color: var(--purple);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(107,79,160,0.35);
+}
+.tab-btn:not(.active):hover {
+  background: rgba(255,255,255,0.8);
+  transform:translateY(-1px);
+}
+
+/* ── PRICE CARDS ── */
+.tab-content { display:none; }
+.tab-content.active { display:block; animation: tabReveal 0.35s ease; }
+@keyframes tabReveal {
+  from { opacity:0; transform:translateY(10px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+.price-card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 16px 18px;
+  margin-bottom: 10px;
+  display: flex; align-items: center; gap:14px;
+  backdrop-filter:blur(8px);
+  box-shadow: 0 2px 12px rgba(107,79,160,0.06);
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+}
+.price-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(107,79,160,0.14);
+  border-color: rgba(107,79,160,0.3);
+}
+.price-card.featured {
+  border-color: rgba(107,79,160,0.3);
+  background: linear-gradient(135deg,rgba(107,79,160,0.08),rgba(255,255,255,0.7));
+}
+.price-card.featured:hover {
+  border-color: rgba(107,79,160,0.5);
+}
+
+.card-icon { font-size:22px; flex-shrink:0; width:34px; text-align:center; }
+.card-body { flex:1; }
+.card-name {
+  font-size:14px; color:var(--cream); font-weight:400;
+  margin-bottom:3px; line-height:1.3;
+}
+.card-time { font-size:11px; color:var(--muted); letter-spacing:0.8px; }
+.card-price {
+  font-family:'Cormorant Garamond',serif;
+  font-size:21px; color:var(--purple);
+  white-space:nowrap; font-weight:600;
+}
+.card-price span {
+  font-size:12px; font-family:'Jost',sans-serif;
+  font-weight:300; color:var(--muted);
+}
+
+.note-block {
+  background: rgba(107,79,160,0.07);
+  border: 1px solid rgba(107,79,160,0.2);
+  border-radius:12px; padding:13px 17px;
+  margin-bottom:12px;
+  font-size:13px; color:var(--muted);
+  font-style:italic; line-height:1.65;
+}
+
+/* ── CTA ── */
+.cta-section { margin:34px 0 26px; }
+.cta-btn {
+  display:flex; align-items:center; justify-content:center; gap:12px;
+  width:100%; padding:16px; border-radius:16px;
+  font-family:'Jost',sans-serif; font-size:13px;
+  letter-spacing:2px; text-transform:uppercase;
+  text-decoration:none; font-weight:500;
+  cursor:pointer; border:none; margin-bottom:12px;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.btn-wa {
+  background: linear-gradient(135deg,#1a6630,#25a244);
+  color:#fff; box-shadow:0 4px 18px rgba(37,162,68,0.28);
+}
+.btn-insta {
+  background: linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);
+  color:#fff; box-shadow:0 4px 18px rgba(131,58,180,0.28);
+}
+.cta-btn:hover { transform:translateY(-3px); box-shadow:0 8px 28px rgba(0,0,0,0.18); }
+.cta-btn:active { transform:translateY(0); }
+
+/* ── DISCLAIMER ── */
+.disclaimer {
+  background: rgba(200,80,80,0.07);
+  border: 1px solid rgba(180,60,60,0.2);
+  border-radius:14px; padding:14px 18px;
+  margin:24px 0; display:flex; gap:12px; align-items:flex-start;
+}
+.disclaimer-text { font-size:13px; color:var(--muted); line-height:1.65; }
+.disclaimer-text strong { color:#b04040; font-weight:400; }
+
+/* ── SOLAR SYSTEM ── */
+.solar-wrap {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  margin: 14px 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#solarCanvas {
+  display: block;
+  max-width: 440px;
+  width: 100%;
+  height: 220px;
+}
+
+/* ── TAROT CARDS ── */
+.tarot-scene {
+  position: relative;
+  height: 220px;
+  margin: 6px 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tarot-card {
+  position: absolute;
+  width: 76px;
+  height: 128px;
+  border-radius: 10px;
+  transform-origin: bottom center;
+  animation: cardFloat var(--cf-d, 5s) ease-in-out infinite;
+  animation-delay: var(--cf-delay, 0s);
+  cursor: pointer;
+  filter: drop-shadow(0 8px 18px rgba(107,79,160,0.22));
+  transition: filter 0.3s;
+}
+.tarot-card:hover {
+  filter: drop-shadow(0 12px 28px rgba(107,79,160,0.5));
+  z-index: 10 !important;
+}
+@keyframes cardFloat {
+  0%,100%{ transform: var(--cf-base) translateY(0px) rotate(var(--cf-rot,0deg)); }
+  50%    { transform: var(--cf-base) translateY(-10px) rotate(var(--cf-rot,0deg)); }
+}
+
+/* ── REVIEWS CAROUSEL ── */
+.reviews-section { margin: 10px 0 32px; }
+
+.carousel-outer {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.7s cubic-bezier(0.4,0,0.2,1);
+  will-change: transform;
+}
+
+.review-slide {
+  min-width: 100%;
+  padding: 0 2px;
+}
+
+.review-card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  padding: 26px 24px 22px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 24px rgba(107,79,160,0.09);
+  position: relative;
+  overflow: hidden;
+}
+
+.review-card::before {
+  content: '"';
+  position: absolute;
+  top: 8px; left: 18px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 80px;
+  color: var(--purple-l);
+  opacity: 0.13;
+  line-height: 1;
+}
+
+.review-tag {
+  display: inline-block;
+  background: var(--purple-dim);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 3px 11px;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--purple);
+  margin-bottom: 14px;
+}
+
+.review-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16.5px;
+  line-height: 1.75;
+  color: var(--cream);
+  font-style: italic;
+  margin-bottom: 18px;
+  position: relative;
+  z-index: 1;
+}
+
+.review-author {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.review-author::before {
+  content: '';
+  display: block;
+  width: 24px; height: 1px;
+  background: var(--gold-l);
+  opacity: 0.5;
+}
+
+/* Dots */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 16px;
+}
+.dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: rgba(107,79,160,0.25);
+  cursor: pointer;
+  transition: all 0.35s;
+}
+.dot.active {
+  width: 20px;
+  border-radius: 3px;
+  background: var(--purple);
+}
+
+/* Progress bar */
+.carousel-progress {
+  position: absolute;
+  bottom: 0; left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--purple-l), var(--gold-l));
+  border-radius: 0 2px 2px 0;
+  transition: width linear;
+}
+
+/* ── FOOTER ── */
+.footer {
+  text-align:center; padding-top:20px;
+  border-top:1px solid var(--border);
+  font-size:10.5px; letter-spacing:2.5px;
+  text-transform:uppercase; color:var(--muted); opacity:0.5;
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity:0; transform:translateY(22px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal.visible { opacity:1; transform:translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- BG blobs -->
+<div class="blobs">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+</div>
+
+<!-- Floating runes -->
+<div class="runes" id="runes"></div>
+
+<!-- Sparkles -->
+<div class="sparkle-field" id="sparkles"></div>
+
+<div class="wrapper">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="orbit-container">
+      <div class="orbit-ring"></div>
+      <div class="orbit-ring2"></div>
+      <div class="orbit-dot"></div>
+      <div class="pulse-ring"></div>
+      <div class="avatar-inner"><img src="data:image/jpeg;base64,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" alt="Маргарита"></div>
+    </div>
+
+    <h1 class="hero-name"><em>Маргарита</em> Раганян</h1>
+    <p class="hero-tagline">Таро · Нумерология · МАК · Психология</p>
+
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-sym">✦</div>
+      <div class="divider-line"></div>
+    </div>
+
+    <p class="hero-desc">
+      Вижу то, что вы боитесь признать себе.<br>
+      Расклады без воды — точно, глубоко, по сути.
+    </p>
+
+    <div class="badges">
+      <div class="badge">7 лет практики</div>
+      <div class="badge">Психологическое образование</div>
+      <div class="badge">Онлайн · весь мир</div>
+      <div class="badge">Отношения</div>
+      <div class="badge">Реализация &amp; Деньги</div>
+    </div>
+
+    <div class="solar-wrap"><canvas id="solarCanvas"></canvas></div>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="glass-card reveal">
+    <p>Я работаю на пересечении <strong>Таро, Нумерологии, карт МАК и психологии</strong> — это позволяет видеть не симптом, а настоящий корень ситуации.</p>
+    <p>Специализируюсь на темах <strong>реализации, денег и отношений</strong>. Работаю онлайн по всему миру. Также <strong>обучаю Таро и Нумерологии</strong>.</p>
+    <div class="stats-row">
+      <div class="stat-item">
+        <span class="stat-num">7+</span>
+        <span class="stat-label">лет практики</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">∞</span>
+        <span class="stat-label">онлайн · мир</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">3</span>
+        <span class="stat-label">направления</span>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- TAROT ANIMATION -->
+  <div class="tarot-scene reveal" id="tarotScene"></div>
+  <!-- PRICES -->
+  <div class="reveal">
+    <p class="section-title">Услуги &amp; Прайс</p>
+
+    <div class="tabs-wrap">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('consult',this)">Консультации</button>
+        <button class="tab-btn" onclick="switchTab('taro-love',this)">Таро · Отношения</button>
+        <button class="tab-btn" onclick="switchTab('taro-work',this)">Таро · Работа</button>
+        <button class="tab-btn" onclick="switchTab('taro-gen',this)">Таро · Общее</button>
+        <button class="tab-btn" onclick="switchTab('numero',this)">Нумерология</button>
+        <button class="tab-btn" onclick="switchTab('brunch',this)">Бранчи</button>
+      </div>
+    </div>
+
+    <!-- Консультации -->
+    <div class="tab-content active" id="tab-consult">
+      <div class="note-block">Нумерология + Таро + МАК в одной сессии — глубокая комплексная работа с любым запросом.</div>
+      <div class="price-card featured">
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9b6e2f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg></div>
+        <div class="card-body">
+          <div class="card-name">Консультация · любой запрос</div>
+          <div class="card-time">60 минут · нумеро + таро + МАК</div>
+        </div>
+        <div class="card-price">10 000 <span>₽</span></div>
+      </div>
+      <div class="price-card">
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9b6e2f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <div class="card-body">
+          <div class="card-name">Консультация · любой запрос</div>
+          <div class="card-time">30 минут · нумеро + таро + МАК</div>
+        </div>
+        <div class="card-price">5 000 <span>₽</span></div>
+      </div>
+    </div>
+
+    <!-- Таро Отношения -->
+    <div class="tab-content" id="tab-taro-love">
+      <div class="price-card"><div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9b6e2f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div><div class="card-body"><div class="card-name">Хочу пару</div><div class="card-time">30 минут</div></div><div class="card-price">3 000 <span>₽</span></div></div>
+      <div class="price-card"><div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9b6e2f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div><div class="card-body"><div class="card-name">Расклад «Отношения»</div><div class="card-time">40 минут</div></div><div class="card-price">5 000 <span>₽</span></div></div>
+      <div class="price-card"><div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9b6e2f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10" r="7"/><path d="M7 21h10M9 21v-3M15 21v-3"/></svg></div><div class="card-body"><div class="card-name">Диагностика партнёра</div><div class="card-time">40 минут</div></div><div class="card-price">6 000 <span>₽</span></div></div>
+      <div class="price-card"><div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9b6e2f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/><circle cx="12" cy="12" r="2" fill="#c9a84c" stroke="none"/></svg></div><div class="card-body"><div class="card-name">Отношения и перспективы с партнёром</div><div class="card-time">60 минут</div></div><div class="card-price">6 000 <span>₽</span></div></div>
+      <div class="price-card"><div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9b6e2f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg></div><div class="card-body"><div class="card-name">Любовный треугольник</div><div class="card-time">40 минут</div></div><div class="card-price">6 000 <span>₽</span></div></div>
+    </div>
+
+    <!-- Таро Работа -->
+    <div class="tab-content" id="tab-taro-work">
+      <div class="price-card"><div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9b6e2f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12M12 12C12 7 7 4 3 5c0 4 3 7 9 7zM12 12c0-5 5-8 9-7-1 4-4 7-9 7z"/></svg></div><div class="card-body"><div class="card-name">Стоит ли начинать новое дело?</div><div class="card-time">30 минут</div></div><div class="card-price">5 000 <span>₽</span></div></div>
+      <div class="price-card"><div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9b6e2f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div class="card-body"><div class="card-name">Какая ситуация в бизнесе?</div><div class="card-time">20 минут</div></div><div class="card-price">3 500 <span>₽</span></div></div>
+      <div class="price-card"><div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9b6e2f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="card-body"><div class="card-name">Отношения с бизнес-партнёром</div><div class="card-time">30 минут</div></div><div class="card-price">4 500 <span>₽</span></div></div>
+      <div class="price-card"><div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9b6e2f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg></div><div class="card-body"><div class="card-name">Выбор вариантов начала нового дела</div><div class="card-time">40 минут</div></div><div class="card-price">5 000 <span>₽</span></div></div>
+      <div class="price-card"><div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9b6e2f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg></div><div class="card-body"><div class="card-name">Прекратить или продолжать дело</div><div class="card-time">30 минут</div></div><div class="card-price">4 500 <span>₽</span></div></div>
+      <div class="price-card featured"><div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9b6e2f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="12"/></svg></div><div class="card-body"><div class="card-name">Смена работы, карьера и деньги</div><div class="card-time">40 минут</div></div><div class="card-price">5 500 <span>₽</span></div></div>
+    </div>
+
+    <!-- Таро Общее -->
+    <div class="tab-content" id="tab-taro-gen">
+      <div class="price-card"><div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9b6e2f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18V4a8 8 0 0 1 0 16z"/></svg></div><div class="card-body"><div class="card-name">Важные сферы на текущий месяц</div><div class="card-time">60 минут</div></div><div class="card-price">3 500 <span>₽</span></div></div>
+      <div class="price-card featured"><div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9b6e2f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="9" cy="9" r="1.5" fill="#c9a84c" stroke="none"/><circle cx="14" cy="13" r="1" fill="#c9a84c" stroke="none"/></svg></div><div class="card-body"><div class="card-name">Важные сферы на текущий год</div><div class="card-time">60 минут</div></div><div class="card-price">5 500 <span>₽</span></div></div>
+    </div>
+
+    <!-- Нумерология -->
+    <div class="tab-content" id="tab-numero">
+      <div class="price-card featured"><div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9b6e2f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M8 7h1M8 11h1M8 15h1M12 7h4M12 11h4M12 15h4"/></svg></div><div class="card-body"><div class="card-name">Разбор психоматрицы с проработками</div><div class="card-time">60 минут</div></div><div class="card-price">8 000 <span>₽</span></div></div>
+      <div class="price-card featured"><div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9b6e2f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="card-body"><div class="card-name">Разбор + обратная связь в течение месяца</div><div class="card-time">60 мин + месяц сопровождения</div></div><div class="card-price">15 000 <span>₽</span></div></div>
+      <div class="price-card"><div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9b6e2f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="7" r="3"/><circle cx="16" cy="7" r="3"/><path d="M2 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M16 11a4 4 0 0 1 4 4v2"/></svg></div><div class="card-body"><div class="card-name">Совместимость партнёров в паре</div><div class="card-time">60 минут</div></div><div class="card-price">15 000 <span>₽</span></div></div>
+      <div class="price-card"><div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9b6e2f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 21V9"/></svg></div><div class="card-body"><div class="card-name">Совместимость в бизнесе</div><div class="card-time">60 минут</div></div><div class="card-price">10 000 <span>₽</span></div></div>
+      <div class="price-card"><div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9b6e2f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><div class="card-body"><div class="card-name">Профориентация ребёнка</div><div class="card-time">60 минут</div></div><div class="card-price">5 500 <span>₽</span></div></div>
+      <div class="price-card"><div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9b6e2f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div class="card-body"><div class="card-name">Выбор и расчёт даты важного события</div><div class="card-time">свадьба, КС и др.</div></div><div class="card-price">3 500 <span>₽</span></div></div>
+      <div class="price-card"><div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9b6e2f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div><div class="card-body"><div class="card-name">График-прогноз на 12 месяцев</div><div class="card-time">с рекомендациями</div></div><div class="card-price">5 000 <span>₽</span></div></div>
+    </div>
+
+    <!-- Бранчи -->
+    <div class="tab-content" id="tab-brunch">
+      <div class="note-block">Уникальный формат — таро и нумерология на вашем частном празднике. Незабываемый подарок для гостей.</div>
+      <div class="price-card featured"><div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9b6e2f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 22 12 2 16 22"/><path d="M10 14h4"/></svg></div><div class="card-body"><div class="card-name">Частный бранч на вашем празднике</div><div class="card-time">до 15 человек</div></div><div class="card-price" style="font-size:14px;text-align:right;color:var(--gold)">Инд.<br><span>цена</span></div></div>
+      <div class="price-card featured"><div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9b6e2f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.2 7.8l-7.7 7.7-4-4-4.5 4.5"/><path d="M15 7h6v6"/></svg></div><div class="card-body"><div class="card-name">Частный бранч на вашем празднике</div><div class="card-time">от 16 и более человек</div></div><div class="card-price" style="font-size:14px;text-align:right;color:var(--gold)">Инд.<br><span>цена</span></div></div>
+    </div>
+  </div>
+
+  <!-- DISCLAIMER -->
+  <div class="disclaimer reveal">
+    <span style="font-size:18px;flex-shrink:0">⚠️</span>
+    <div class="disclaimer-text"><strong>Важно:</strong> я не делаю расклады на темы <strong>здоровья и судебных процессов</strong>. Это моя профессиональная позиция — работаю там, где могу быть по-настоящему полезна.</div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section reveal">
+    <p class="section-title">Записаться</p>
+    <a class="cta-btn btn-wa" href="https://wa.me/79186318325" target="_blank">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp
+    </a>
+    <a class="cta-btn btn-insta" href="https://www.instagram.com/margarita_raganyan" target="_blank">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      Direct в Instagram
+    </a>
+  </div>
+
+  <!-- REVIEWS CAROUSEL -->
+  <div class="reviews-section reveal">
+    <p class="section-title">Отзывы</p>
+    <div class="carousel-outer" id="carousel">
+      <div class="carousel-track" id="track">
+
+        <div class="review-slide"><div class="review-card">
+          <div class="review-tag">Нумерология · Бранчи</div>
+          <p class="review-text">Хотела в очередной раз сказать, как я благодарна тебе за всё. Мне так нравится проводить бранчи, заниматься нумеро. Я так долго искала себя. И тут всё встало на свои места как-то само собой, благодаря тебе 🙏💛</p>
+          <div class="review-author">Клиент · Нумерология</div>
+        </div></div>
+
+        <div class="review-slide"><div class="review-card">
+          <div class="review-tag">Таро · Расклад</div>
+          <p class="review-text">Маргарита, я в восторге от вашего расклада 😍 Панические атаки — я в шоке! Маргарита, вы Ванга 😂</p>
+          <div class="review-author">Клиент · Таро</div>
+        </div></div>
+
+        <div class="review-slide"><div class="review-card">
+          <div class="review-tag">Таро · Точность</div>
+          <p class="review-text">Марго, ты волк. Слушаю ваш расклад — просто супер. И многое в точности про меня. Я в шоке просто 🤯 А где ты училась таро??? Прям круто.</p>
+          <div class="review-author">Клиент · Таро</div>
+        </div></div>
+
+        <div class="review-slide"><div class="review-card">
+          <div class="review-tag">Таро · Отношения</div>
+          <p class="review-text">Блин, я в шоке просто от расклада. Вы настолько всё увидели правильно — как будто жили со мной 🤷 Честно, я пока в шоке.</p>
+          <div class="review-author">Клиент · Таро «Разводиться или нет?»</div>
+        </div></div>
+
+        <div class="review-slide"><div class="review-card">
+          <div class="review-tag">Обучение</div>
+          <p class="review-text">Огромное спасибо Марго!!! Материал и подача на высоком уровне, мне было легко и приятно проходить обучение 🚀 Благодарю за твой труд, желаю успехов во всех направлениях 🔥</p>
+          <div class="review-author">Ученик · Курс Нумерология</div>
+        </div></div>
+
+        <div class="review-slide"><div class="review-card">
+          <div class="review-tag">Эфир · Бранч</div>
+          <p class="review-text">Марго, спасибо за сегодняшний эфир 🔥 Ты за 5 минут всё настолько грамотно разложила по полочкам — это просто кайф 😍 Ждём тебя в марте в Сочи, чтобы попасть на бранч!</p>
+          <div class="review-author">Клиент · Закрытый эфир</div>
+        </div></div>
+
+      </div>
+      <div class="carousel-progress" id="progress"></div>
+    </div>
+    <div class="carousel-dots" id="dots"></div>
+  </div>
+
+  <div class="footer">© 2026 Маргарита Раганян · Таро &amp; Нумерология</div>
+</div>
+
+<script>
+// ── Floating runes
+const runeSymbols = ['☽','☾','✦','✧','⋆','✶','⊹','✵','⟡','◈','⌘','✺','⟐','◉','⊕'];
+const runesEl = document.getElementById('runes');
+for (let i = 0; i < 18; i++) {
+  const r = document.createElement('div');
+  r.className = 'rune';
+  r.textContent = runeSymbols[i % runeSymbols.length];
+  const size = 12 + Math.random() * 14;
+  r.style.cssText = `
+    left: ${Math.random() * 100}%;
+    top: ${Math.random() * 100}%;
+    --rs: ${size}px;
+    --rd: ${7 + Math.random() * 12}s;
+    --ro: ${0.1 + Math.random() * 0.15};
+    --delay: -${Math.random() * 12}s;
+  `;
+  runesEl.appendChild(r);
+}
+
+// ── Sparkles
+const sparklesEl = document.getElementById('sparkles');
+for (let i = 0; i < 22; i++) {
+  const s = document.createElement('div');
+  s.className = 'sparkle';
+  const size = 5 + Math.random() * 7;
+  s.style.cssText = `
+    left: ${Math.random() * 100}%;
+    top: ${Math.random() * 100}%;
+    --sw: ${size}px;
+    --sd: ${2 + Math.random() * 4}s;
+    --sdelay: -${Math.random() * 5}s;
+  `;
+  sparklesEl.appendChild(s);
+}
+
+// ── Tab switching
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── Scroll reveal
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ── Carousel
+(function() {
+  const track = document.getElementById('track');
+  const dotsWrap = document.getElementById('dots');
+  const progressEl = document.getElementById('progress');
+  const slides = track.querySelectorAll('.review-slide');
+  const total = slides.length;
+  const INTERVAL = 7000;
+  let current = 0;
+  let timer = null;
+  let progressStart = null;
+  let progressFrame = null;
+
+  // Build dots
+  slides.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', () => goTo(i, true));
+    dotsWrap.appendChild(d);
+  });
+
+  function updateDots() {
+    dotsWrap.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+
+  function goTo(idx, reset) {
+    current = (idx + total) % total;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    updateDots();
+    if (reset) { clearTimer(); startTimer(); }
+  }
+
+  // Animated progress bar
+  function animateProgress() {
+    cancelAnimationFrame(progressFrame);
+    progressStart = performance.now();
+    function step(now) {
+      const elapsed = now - progressStart;
+      const pct = Math.min((elapsed / INTERVAL) * 100, 100);
+      progressEl.style.width = pct + '%';
+      progressEl.style.transitionDuration = '0ms';
+      if (pct < 100) progressFrame = requestAnimationFrame(step);
+    }
+    progressFrame = requestAnimationFrame(step);
+  }
+
+  function startTimer() {
+    animateProgress();
+    timer = setInterval(() => {
+      goTo(current + 1, false);
+      animateProgress();
+    }, INTERVAL);
+  }
+
+  function clearTimer() {
+    clearInterval(timer);
+    cancelAnimationFrame(progressFrame);
+    progressEl.style.width = '0%';
+  }
+
+  // Touch/swipe
+  let touchX = null;
+  const carouselEl = document.getElementById('carousel');
+  carouselEl.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+  carouselEl.addEventListener('touchend', e => {
+    if (touchX === null) return;
+    const diff = touchX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) { goTo(current + (diff > 0 ? 1 : -1), true); }
+    touchX = null;
+  }, { passive: true });
+
+  // Pause on hover
+  carouselEl.addEventListener('mouseenter', clearTimer);
+  carouselEl.addEventListener('mouseleave', () => startTimer());
+
+  startTimer();
+})();
+
+// ── Solar System 3D Canvas
+(function(){
+  const canvas = document.getElementById('solarCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  function resize() {
+    const w = Math.min(canvas.parentElement.offsetWidth, 440);
+    canvas.width = w;
+    canvas.height = 220;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Helper colors
+  function lighten(hex, a) {
+    let r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
+    return `rgb(${Math.min(255,r+a)},${Math.min(255,g+a)},${Math.min(255,b+a)})`;
+  }
+  function darken(hex, a) {
+    let r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
+    return `rgb(${Math.max(0,r-a)},${Math.max(0,g-a)},${Math.max(0,b-a)})`;
+  }
+
+  // Seeded random
+  let sx = 9876;
+  function rnd() { sx=(sx*16807)%2147483647; return (sx-1)/2147483646; }
+
+  // STARS (twinkle)
+  const STARS = [];
+  for (let i=0;i<80;i++) STARS.push({x:rnd(),y:rnd(),r:0.3+rnd()*1.1,a:0.2+rnd()*0.7,ph:rnd()*Math.PI*2});
+
+  // Planets
+  const PLANETS = [
+    {rf:0.13,r:2.8,col:'#b8b8b8',spd:4.74,ring:false,inc:0.08},
+    {rf:0.20,r:4.5,col:'#e8c060',spd:3.50,ring:false,inc:-0.06},
+    {rf:0.29,r:4.8,col:'#6ab4f5',spd:2.98,ring:false,inc:0.05},
+    {rf:0.38,r:3.5,col:'#d4724a',spd:2.41,ring:false,inc:0.10},
+    {rf:0.52,r:8.5,col:'#c8a860',spd:1.31,ring:false,inc:-0.04},
+    {rf:0.67,r:7.0,col:'#e8d090',spd:0.97,ring:true, inc:0.07},
+    {rf:0.80,r:5.5,col:'#a8d8e8',spd:0.68,ring:false,inc:-0.05},
+    {rf:0.94,r:5.2,col:'#6080d8',spd:0.54,ring:false,inc:0.03},
+  ];
+
+  // Rockets: [angle, speed, orbitR, size, trailLen]
+  const ROCKETS = [
+    {a:1.2, spd:0.035, rf:0.44, sz:5, trail:[]},
+    {a:3.8, spd:-0.028, rf:0.59, sz:4, trail:[]},
+  ];
+
+  // Comets
+  const COMETS = [
+    {x:0.92, y:0.05, vx:-0.0028, vy:0.0018, trail:[], life:0, period:320, phase:0},
+    {x:0.05, y:0.88, vx:0.0022, vy:-0.0015, trail:[], life:0, period:450, phase:160},
+  ];
+
+  // Shooting stars
+  const SHOOTS = [];
+  for(let i=0;i<3;i++) SHOOTS.push({t:Math.random()*300, period:200+Math.random()*300, ax:0.1+Math.random()*0.3, ay:0.05+Math.random()*0.15, angle: Math.PI/5+Math.random()*Math.PI/4, len:40+Math.random()*60});
+
+  let frame = 0;
+  const BS = 0.007;
+  const TILT = 0.32; // 3D perspective tilt factor
+
+  function project3D(x, y, cx, cy) {
+    // Isometric-style tilt: compress y-axis to simulate 3D view
+    const dx = x - cx, dy = y - cy;
+    return { x: cx + dx, y: cy + dy * TILT };
+  }
+
+  function drawOrbitEllipse(cx, cy, rx, ry, tilt) {
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.beginPath();
+    ctx.ellipse(0, 0, rx, ry * TILT, 0, 0, Math.PI*2);
+    ctx.strokeStyle = 'rgba(107,79,160,0.18)';
+    ctx.lineWidth = 0.7;
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  function getPlanetPos(cx, cy, orb, angle, inc) {
+    const x = cx + Math.cos(angle) * orb;
+    const y = cy + Math.sin(angle) * orb * TILT + inc * orb * 0.2 * Math.sin(angle * 0.7);
+    return {x, y};
+  }
+
+  function draw() {
+    const W = canvas.width, H = canvas.height;
+    const cx = W/2, cy = H/2 - 5;
+    const maxR = Math.min(cx-4, cy-4);
+
+    // Dark space bg
+    ctx.fillStyle = 'rgba(13,10,22,0.15)';
+    ctx.fillRect(0,0,W,H);
+
+    // ── Stars twinkle
+    STARS.forEach(s => {
+      const flicker = 0.5 + 0.5 * Math.sin(frame * 0.04 + s.ph);
+      const a = s.a * flicker;
+      ctx.beginPath();
+      ctx.arc(s.x*W, s.y*H, s.r, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(240,230,200,${a})`;
+      ctx.fill();
+    });
+
+    // ── Shooting stars
+    SHOOTS.forEach(sh => {
+      const lt = (frame + sh.t) % sh.period;
+      if (lt < 40) {
+        const prog = lt / 40;
+        const sx2 = sh.ax * W + Math.cos(sh.angle) * sh.len * prog;
+        const sy2 = sh.ay * H + Math.sin(sh.angle) * sh.len * prog;
+        const sx1 = sx2 - Math.cos(sh.angle) * sh.len * 0.5;
+        const sy1 = sy2 - Math.sin(sh.angle) * sh.len * 0.5;
+        const grd = ctx.createLinearGradient(sx1,sy1,sx2,sy2);
+        grd.addColorStop(0,'rgba(255,255,220,0)');
+        grd.addColorStop(1,`rgba(255,255,220,${(1-prog)*0.85})`);
+        ctx.beginPath(); ctx.moveTo(sx1,sy1); ctx.lineTo(sx2,sy2);
+        ctx.strokeStyle=grd; ctx.lineWidth=1.5; ctx.stroke();
+      }
+    });
+
+    // ── Orbit ellipses (3D)
+    PLANETS.forEach(p => {
+      const orb = p.rf * maxR;
+      drawOrbitEllipse(cx, cy, orb, orb, TILT);
+    });
+
+    // ── Sun glow layers
+    [22,16,10].forEach((r,i) => {
+      const g = ctx.createRadialGradient(cx,cy,0,cx,cy,r);
+      const alphas = ['0.18','0.35','1.0'];
+      g.addColorStop(0, `rgba(255,240,120,${alphas[i]})`);
+      g.addColorStop(0.6,`rgba(255,160,30,${i===2?'0.9':'0.2'})`);
+      g.addColorStop(1, 'rgba(255,100,0,0)');
+      ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2);
+      ctx.fillStyle=g; ctx.fill();
+    });
+    ctx.beginPath(); ctx.arc(cx,cy,7,0,Math.PI*2);
+    ctx.fillStyle='#fffde0'; ctx.fill();
+
+    // ── Comets
+    COMETS.forEach(c => {
+      const life = (frame + c.phase) % c.period;
+      if (life < c.period * 0.6) {
+        c.x += c.vx; c.y += c.vy;
+        const cx2 = c.x * W, cy2 = c.y * H;
+        c.trail.push({x:cx2,y:cy2});
+        if (c.trail.length > 18) c.trail.shift();
+        // tail
+        for (let i=1;i<c.trail.length;i++) {
+          const a = (i/c.trail.length) * 0.7;
+          ctx.beginPath();
+          ctx.moveTo(c.trail[i-1].x,c.trail[i-1].y);
+          ctx.lineTo(c.trail[i].x,c.trail[i].y);
+          ctx.strokeStyle=`rgba(200,220,255,${a})`;
+          ctx.lineWidth=1+i*0.1; ctx.stroke();
+        }
+        // head
+        const hg=ctx.createRadialGradient(cx2,cy2,0,cx2,cy2,4);
+        hg.addColorStop(0,'rgba(220,240,255,0.95)');
+        hg.addColorStop(1,'rgba(100,160,255,0)');
+        ctx.beginPath();ctx.arc(cx2,cy2,4,0,Math.PI*2);
+        ctx.fillStyle=hg;ctx.fill();
+      } else {
+        // reset comet position
+        c.x = rnd()>0.5 ? 1.05 : -0.05;
+        c.y = rnd() * 0.5;
+        c.vx = c.x > 0.5 ? -(0.002+rnd()*0.002) : (0.002+rnd()*0.002);
+        c.vy = 0.001+rnd()*0.002;
+        c.trail=[];
+      }
+    });
+
+    // ── Planets & their 3D position
+    const planetPositions = PLANETS.map(p => {
+      const orb = p.rf * maxR;
+      const angle = frame * BS * p.spd;
+      const pos = getPlanetPos(cx, cy, orb, angle, p.inc);
+      return {p, angle, pos, orb};
+    });
+
+    // Sort by y for painter's algorithm (back to front)
+    planetPositions.sort((a,b) => a.pos.y - b.pos.y);
+
+    planetPositions.forEach(({p, angle, pos}) => {
+      const {x:px, y:py} = pos;
+
+      // Saturn ring (behind planet half)
+      if (p.ring) {
+        ctx.save(); ctx.translate(px,py);
+        ctx.scale(1, 0.32);
+        ctx.beginPath(); ctx.arc(0,0,p.r*2.2,Math.PI,0);
+        ctx.strokeStyle='rgba(232,208,140,0.45)'; ctx.lineWidth=3; ctx.stroke();
+        ctx.restore();
+      }
+
+      // Glow
+      const grd=ctx.createRadialGradient(px,py,0,px,py,p.r*2.2);
+      grd.addColorStop(0,p.col+'88'); grd.addColorStop(1,p.col+'00');
+      ctx.beginPath();ctx.arc(px,py,p.r*2.2,0,Math.PI*2);
+      ctx.fillStyle=grd;ctx.fill();
+
+      // Body with 3D shading
+      const pbg=ctx.createRadialGradient(px-p.r*0.35,py-p.r*0.35,p.r*0.05,px,py,p.r);
+      pbg.addColorStop(0,lighten(p.col,50));
+      pbg.addColorStop(0.6,p.col);
+      pbg.addColorStop(1,darken(p.col,40));
+      ctx.beginPath();ctx.arc(px,py,p.r,0,Math.PI*2);
+      ctx.fillStyle=pbg;ctx.fill();
+
+      // Saturn ring front
+      if (p.ring) {
+        ctx.save(); ctx.translate(px,py);
+        ctx.scale(1, 0.32);
+        ctx.beginPath(); ctx.arc(0,0,p.r*2.2,0,Math.PI);
+        ctx.strokeStyle='rgba(232,208,140,0.65)'; ctx.lineWidth=3; ctx.stroke();
+        ctx.restore();
+      }
+
+      // Earth moon
+      if (p.col === '#6ab4f5') {
+        const ma=angle*9; const mr=p.r+7;
+        const mx=px+Math.cos(ma)*mr*1.0;
+        const my=py+Math.sin(ma)*mr*0.32;
+        ctx.beginPath();ctx.arc(mx,my,1.8,0,Math.PI*2);
+        ctx.fillStyle='#c8d4e8';ctx.fill();
+      }
+    });
+
+    // ── Rockets
+    ROCKETS.forEach(rk => {
+      rk.a += rk.spd;
+      const orb = rk.rf * maxR;
+      const rx = cx + Math.cos(rk.a) * orb;
+      const ry = cy + Math.sin(rk.a) * orb * TILT;
+      rk.trail.push({x:rx,y:ry});
+      if (rk.trail.length>12) rk.trail.shift();
+      // Trail flame
+      for(let i=1;i<rk.trail.length;i++) {
+        const ta = (i/rk.trail.length)*0.6;
+        ctx.beginPath();ctx.moveTo(rk.trail[i-1].x,rk.trail[i-1].y);
+        ctx.lineTo(rk.trail[i].x,rk.trail[i].y);
+        ctx.strokeStyle=`rgba(255,${160+i*5},80,${ta})`;
+        ctx.lineWidth=1.5;ctx.stroke();
+      }
+      // Rocket body
+      ctx.save();
+      ctx.translate(rx,ry);
+      ctx.rotate(rk.a + (rk.spd>0 ? Math.PI/2 : -Math.PI/2));
+      ctx.fillStyle='#e0d8f0';
+      ctx.beginPath();
+      ctx.moveTo(0,-rk.sz); ctx.lineTo(rk.sz*0.5,rk.sz); ctx.lineTo(-rk.sz*0.5,rk.sz); ctx.closePath();
+      ctx.fill();
+      ctx.fillStyle='#c49a4e';
+      ctx.fillRect(-rk.sz*0.6,rk.sz*0.3,rk.sz*1.2,rk.sz*0.5);
+      // Window
+      ctx.beginPath(); ctx.arc(0,0,rk.sz*0.35,0,Math.PI*2);
+      ctx.fillStyle='#a8d8f8'; ctx.fill();
+      ctx.restore();
+    });
+
+    frame++;
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+})();
+
+// ── Tarot cards
+(function(){
+  const scene = document.getElementById('tarotScene');
+  if (!scene) return;
+
+  const CARDS = [
+    { title:'THE MOON',      sym:'☽', color1:'#2d1654', color2:'#6b4fa0', accent:'#c9a84c' },
+    { title:'THE STAR',      sym:'✦', color1:'#1a3a5c', color2:'#2e6fa0', accent:'#e8d5a0' },
+    { title:'THE SUN',       sym:'☀', color1:'#7a3a10', color2:'#c9621a', accent:'#f5e0a0' },
+    { title:'HIGH PRIESTESS',sym:'◉', color1:'#2d3a20', color2:'#4a6a30', accent:'#d4c2a0' },
+    { title:'THE WORLD',     sym:'⊕', color1:'#3a1a3a', color2:'#7a3a7a', accent:'#e0c8e8' },
+  ];
+
+  // Layout: fan arrangement
+  const positions = [
+    { x: -155, rot: -22, z: 1, delay: 0.2 },
+    { x: -78,  rot: -11, z: 2, delay: 0.5 },
+    { x: 0,    rot:   0, z: 3, delay: 0.0 },
+    { x: 78,   rot:  11, z: 2, delay: 0.7 },
+    { x: 155,  rot:  22, z: 1, delay: 0.3 },
+  ];
+
+  CARDS.forEach((card, i) => {
+    const pos = positions[i];
+    const el = document.createElement('div');
+    el.className = 'tarot-card';
+    el.style.cssText = `
+      left: 50%;
+      --cf-base: translateX(calc(-50% + ${pos.x}px));
+      --cf-rot: ${pos.rot}deg;
+      --cf-d: ${4.5 + i * 0.3}s;
+      --cf-delay: -${pos.delay}s;
+      z-index: ${pos.z};
+    `;
+
+    el.innerHTML = `<svg width="76" height="128" viewBox="0 0 76 128" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="cg${i}" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="${card.color2}"/>
+          <stop offset="100%" stop-color="${card.color1}"/>
+        </linearGradient>
+        <linearGradient id="bg${i}" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="${card.accent}" stop-opacity="0.25"/>
+          <stop offset="100%" stop-color="${card.accent}" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <!-- Card body -->
+      <rect width="76" height="128" rx="9" fill="url(#cg${i})"/>
+      <!-- Border frame outer -->
+      <rect x="3" y="3" width="70" height="122" rx="7" fill="none" stroke="${card.accent}" stroke-width="0.7" opacity="0.5"/>
+      <!-- Border frame inner -->
+      <rect x="7" y="7" width="62" height="114" rx="5" fill="none" stroke="${card.accent}" stroke-width="0.4" opacity="0.3"/>
+      <!-- Top shimmer -->
+      <rect x="3" y="3" width="70" height="30" rx="7" fill="url(#bg${i})"/>
+      <!-- Corner ornaments -->
+      <path d="M10,10 L16,10 M10,10 L10,16" stroke="${card.accent}" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+      <path d="M66,10 L60,10 M66,10 L66,16" stroke="${card.accent}" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+      <path d="M10,118 L16,118 M10,118 L10,112" stroke="${card.accent}" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+      <path d="M66,118 L60,118 M66,118 L66,112" stroke="${card.accent}" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+      <!-- Roman numeral style line -->
+      <line x1="12" y1="21" x2="64" y2="21" stroke="${card.accent}" stroke-width="0.5" opacity="0.4"/>
+      <!-- Central symbol -->
+      <text x="38" y="74" text-anchor="middle" dominant-baseline="middle"
+        font-family="Georgia,serif" font-size="26" fill="${card.accent}" opacity="0.9">${card.sym}</text>
+      <!-- Decorative dots around symbol -->
+      <circle cx="38" cy="50" r="1.5" fill="${card.accent}" opacity="0.4"/>
+      <circle cx="56" cy="68" r="1.5" fill="${card.accent}" opacity="0.4"/>
+      <circle cx="20" cy="68" r="1.5" fill="${card.accent}" opacity="0.4"/>
+      <circle cx="38" cy="86" r="1.5" fill="${card.accent}" opacity="0.4"/>
+      <!-- Card title bottom -->
+      <line x1="12" y1="103" x2="64" y2="103" stroke="${card.accent}" stroke-width="0.5" opacity="0.4"/>
+      <text x="38" y="113" text-anchor="middle" dominant-baseline="middle"
+        font-family="Georgia,serif" font-size="5.5" fill="${card.accent}" letter-spacing="1.2" opacity="0.85">${card.title}</text>
+      <!-- Subtle star pattern bg -->
+      <circle cx="22" cy="35" r="0.8" fill="${card.accent}" opacity="0.2"/>
+      <circle cx="54" cy="35" r="0.8" fill="${card.accent}" opacity="0.2"/>
+      <circle cx="38" cy="30" r="0.8" fill="${card.accent}" opacity="0.2"/>
+      <circle cx="15" cy="55" r="0.6" fill="${card.accent}" opacity="0.15"/>
+      <circle cx="61" cy="55" r="0.6" fill="${card.accent}" opacity="0.15"/>
+      <circle cx="15" cy="90" r="0.6" fill="${card.accent}" opacity="0.15"/>
+      <circle cx="61" cy="90" r="0.6" fill="${card.accent}" opacity="0.15"/>
+    </svg>`;
+
+    scene.appendChild(el);
+  });
+})();
+
+</script>
+</body>
+</html>
