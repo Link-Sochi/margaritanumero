@@ -20,6 +20,52 @@
 <!-- Calendly CSS -->
 <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 <style>
+/* ── TABS SCROLL HINT ── */
+.tabs-outer {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+/* Right fade gradient — overlaid, doesn't scroll */
+.tabs-fade {
+  position: absolute;
+  right: 32px;
+  top: 0;
+  width: 40px;
+  height: 100%;
+  background: linear-gradient(to right, transparent, var(--bg) 85%);
+  pointer-events: none;
+  z-index: 2;
+  transition: opacity 0.35s;
+}
+.tabs-fade.hidden { opacity: 0; }
+/* Arrow chevron */
+.tabs-arrow {
+  position: absolute;
+  right: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--purple);
+  font-size: 22px;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  pointer-events: none;
+  z-index: 3;
+  animation: arrowBounce 1.6s ease-in-out infinite;
+  transition: opacity 0.35s;
+}
+.tabs-arrow.hidden { opacity: 0; }
+@keyframes arrowBounce {
+  0%,100% { transform: translateY(-50%) translateX(0px); opacity: 0.6; }
+  50%      { transform: translateY(-50%) translateX(4px); opacity: 1; }
+}
+
+
 :root {
   --bg:        #f0ecf8;
   --bg2:       #e8e1f5;
@@ -1017,7 +1063,6 @@ body {
 .pm-wrapper .m-cell.filled .m-cell-name { color:var(--ccolor); }
 
 /* Lines */
-.pm-wrapper .lines-section { animation:fadeUp .5s .3s ease both; margin-bottom:10px; }
 .pm-wrapper .lines-title {
   font-family:'Cormorant Garamond',serif;
   font-size:16px; letter-spacing:2px; text-transform:uppercase;
@@ -1113,7 +1158,6 @@ body {
 .pm-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 7px 22px rgba(107,79,160,0.45); }
 
 /* Lines grid — compact card style */
-.pm-wrapper .lines-section { animation:fadeUp .5s .3s ease both; margin-bottom:10px; }
 .pm-wrapper .lines-title {
   font-family: 'Cormorant Garamond', serif;
   font-size: 16px; letter-spacing: 2px; text-transform: uppercase;
@@ -1251,12 +1295,6 @@ body {
 
 
 /* ── YEAR FORECAST GRAPH ── */
-.pm-graph-section {
-  margin-top: 20px;
-  animation: fadeUp .5s .35s ease both;
-  width: 100%;
-  box-sizing: border-box;
-}
 .pm-graph-header {
   display: flex;
   flex-direction: column;
@@ -1301,18 +1339,6 @@ body {
   min-width: 44px;
   text-align: center;
 }
-.pm-year-info {
-  background: linear-gradient(135deg, rgba(107,79,160,0.1), rgba(155,110,47,0.06));
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 14px 16px;
-  margin-bottom: 14px;
-  font-size: 16px;
-  color: var(--muted);
-  line-height: 1.7;
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-}
 .pm-year-info strong {
   color: var(--cream);
   font-style: normal;
@@ -1336,15 +1362,6 @@ body {
 
 
 /* ── BIRTH NUMBER BLOCK ── */
-.pm-birth-block {
-  background: linear-gradient(135deg, rgba(155,110,47,0.1), rgba(107,79,160,0.06));
-  border: 1px solid rgba(155,110,47,0.22);
-  border-radius: 16px;
-  padding: 16px 18px;
-  margin: 14px 0 6px;
-  width: 100%;
-  box-sizing: border-box;
-}
 .pm-birth-label {
   font-size: 9.5px;
   letter-spacing: 2px;
@@ -1368,36 +1385,6 @@ body {
   line-height: 1.7;
 }
 
-
-/* ── TABS SCROLL ARROW ── */
-.tabs-outer {
-  position: relative;
-  width: 100%;
-}
-.tabs-arrow {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 28px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(to left, var(--bg) 60%, transparent);
-  color: var(--purple);
-  font-size: 20px;
-  font-family: 'Cormorant Garamond', serif;
-  pointer-events: none;
-  transition: opacity 0.4s;
-  z-index: 2;
-  animation: arrowPulse 1.8s ease-in-out infinite;
-}
-@keyframes arrowPulse {
-  0%,100% { transform: translateY(-50%) translateX(0); opacity: 0.7; }
-  50%      { transform: translateY(-50%) translateX(3px); opacity: 1; }
-}
-.tabs-arrow.hidden { opacity: 0; }
 
 /* ── FOOTER ── */
   .matrix-footer {
@@ -1751,36 +1738,6 @@ body {
 }
 
 
-/* ── TABS SCROLL ARROW ── */
-.tabs-outer {
-  position: relative;
-  width: 100%;
-}
-.tabs-arrow {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 28px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(to left, var(--bg) 60%, transparent);
-  color: var(--purple);
-  font-size: 20px;
-  font-family: 'Cormorant Garamond', serif;
-  pointer-events: none;
-  transition: opacity 0.4s;
-  z-index: 2;
-  animation: arrowPulse 1.8s ease-in-out infinite;
-}
-@keyframes arrowPulse {
-  0%,100% { transform: translateY(-50%) translateX(0); opacity: 0.7; }
-  50%      { transform: translateY(-50%) translateX(3px); opacity: 1; }
-}
-.tabs-arrow.hidden { opacity: 0; }
-
 /* ── FOOTER ── */
 .footer {
   text-align:center; padding-top:20px;
@@ -2064,12 +2021,15 @@ body {
     <div class="tabs-outer">
       <div class="tabs-wrap" id="tabs-wrap">
         <div class="tabs">
-        <button class="tab-btn active" onclick="switchTab('consult',this)">Нумерология</button>
-        <button class="tab-btn" onclick="switchTab('taro-love',this)">Таро · Отношения</button>
-        <button class="tab-btn" onclick="switchTab('taro-work',this)">Таро · Работа</button>
-        <button class="tab-btn" onclick="switchTab('taro-gen',this)">Таро · Общее</button>
-        <button class="tab-btn" onclick="switchTab('brunch',this)">Бранчи</button>
+          <button class="tab-btn active" onclick="switchTab('consult',this)">Нумерология</button>
+          <button class="tab-btn" onclick="switchTab('taro-love',this)">Таро · Отношения</button>
+          <button class="tab-btn" onclick="switchTab('taro-work',this)">Таро · Работа</button>
+          <button class="tab-btn" onclick="switchTab('taro-gen',this)">Таро · Общее</button>
+          <button class="tab-btn" onclick="switchTab('brunch',this)">Бранчи</button>
+        </div>
       </div>
+      <div class="tabs-fade" aria-hidden="true"></div>
+      <div class="tabs-arrow" id="tabs-arrow">›</div>
     </div>
 
     <!-- Нумерология (переименована из Консультаций) -->
@@ -2881,6 +2841,7 @@ function toggleFaq(item) {
   }
 
   // ── Animate the current month dot with pulsing ring
+  // Uses ImageData snapshot to avoid white-square artifact from clearRect
   let _animFrame = null;
   function animatePulse(canvas, pts, W, H, targetYear) {
     if (_animFrame) cancelAnimationFrame(_animFrame);
@@ -2889,41 +2850,35 @@ function toggleFaq(item) {
     if (!curPt) return;
 
     const ctx = canvas.getContext('2d');
-    const PL=38, PR=12, PT=22, PB=34;
+    // Save static canvas state (everything already drawn, without pulsing dot)
+    const snapshot = ctx.getImageData(0, 0, W, H);
     let t = 0;
 
     function frame() {
-      // Clear only the area around the current point (to avoid redrawing everything)
-      const r = 20;
-      ctx.clearRect(curPt.x - r, curPt.y - r - 14, r*2, r*2 + 14);
+      // Restore full static background — no white square!
+      ctx.putImageData(snapshot, 0, 0);
 
-      // Redraw background at that spot (just a clean rect — the lines are beneath)
-      // We redraw static elements under the dot
-      const phase   = (Math.sin(t * 0.06) + 1) / 2;   // 0..1
-      const ring1R  = 8 + phase * 8;                    // pulsing ring radius
-      const ring1A  = 0.4 * (1 - phase);                // fades as it expands
+      const phase  = (Math.sin(t * 0.055) + 1) / 2;   // 0→1
+      const phase2 = (Math.sin(t * 0.055 + Math.PI) + 1) / 2;
 
-      // Outer pulsing ring
+      // Outer pulsing ring 1
       ctx.beginPath();
-      ctx.arc(curPt.x, curPt.y, ring1R, 0, Math.PI*2);
-      ctx.strokeStyle = `rgba(201,168,76,${ring1A})`;
-      ctx.lineWidth = 1.5;
+      ctx.arc(curPt.x, curPt.y, 8 + phase * 9, 0, Math.PI*2);
+      ctx.strokeStyle = `rgba(201,168,76,${0.45 * (1-phase)})`;
+      ctx.lineWidth = 1.8;
       ctx.stroke();
 
-      // Second ring, offset phase
-      const phase2  = (Math.sin(t * 0.06 + Math.PI) + 1) / 2;
-      const ring2R  = 8 + phase2 * 8;
-      const ring2A  = 0.25 * (1 - phase2);
+      // Outer pulsing ring 2 (offset)
       ctx.beginPath();
-      ctx.arc(curPt.x, curPt.y, ring2R, 0, Math.PI*2);
-      ctx.strokeStyle = `rgba(201,168,76,${ring2A})`;
-      ctx.lineWidth = 1;
+      ctx.arc(curPt.x, curPt.y, 8 + phase2 * 9, 0, Math.PI*2);
+      ctx.strokeStyle = `rgba(201,168,76,${0.25 * (1-phase2)})`;
+      ctx.lineWidth = 1.2;
       ctx.stroke();
 
-      // Inner glow
+      // Inner soft glow
       ctx.beginPath();
-      ctx.arc(curPt.x, curPt.y, 8, 0, Math.PI*2);
-      ctx.fillStyle = `rgba(201,168,76,${0.15 + phase * 0.1})`;
+      ctx.arc(curPt.x, curPt.y, 9, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(201,168,76,${0.12 + phase * 0.08})`;
       ctx.fill();
 
       // Core dot
@@ -2932,7 +2887,7 @@ function toggleFaq(item) {
       ctx.fillStyle = '#c9a84c';
       ctx.fill();
 
-      // Label
+      // Digit label
       ctx.fillStyle = '#c9a84c';
       ctx.font = 'bold 11px Cormorant Garamond,serif';
       ctx.textAlign = 'center';
@@ -3042,11 +2997,18 @@ function toggleFaq(item) {
 (function(){
   const wrap  = document.getElementById('tabs-wrap');
   const arrow = document.getElementById('tabs-arrow');
+  const fade  = wrap ? wrap.parentElement.querySelector('.tabs-fade') : null;
   if (!wrap || !arrow) return;
-  wrap.addEventListener('scroll', function() {
-    const atEnd = wrap.scrollLeft + wrap.clientWidth >= wrap.scrollWidth - 10;
+  function update() {
+    const atEnd = wrap.scrollLeft + wrap.clientWidth >= wrap.scrollWidth - 8;
     arrow.classList.toggle('hidden', atEnd);
-  }, { passive: true });
+    if (fade) fade.classList.toggle('hidden', atEnd);
+  }
+  wrap.addEventListener('scroll', update, { passive: true });
+  // Also hide on tab click if fully scrolled
+  wrap.querySelectorAll && wrap.querySelectorAll('button').forEach(btn =>
+    btn.addEventListener('click', () => setTimeout(update, 50))
+  );
 })();
 
 </script>
