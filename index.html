@@ -1165,29 +1165,33 @@ body {
 }
 .pm-wrapper .lines-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 5px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
   width: 100%;
   box-sizing: border-box;
+  overflow: visible;
 }
 .line-item {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 10px 8px;
-  text-align: center;
+  padding: 12px 10px;
   backdrop-filter: blur(8px);
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 5px;
+  text-align: center;
+  min-width: 0;
 }
 .line-name {
-  font-size: 8.5px;
-  letter-spacing: 1px;
+  font-size: 9.5px;
+  letter-spacing: 0.8px;
   text-transform: uppercase;
   color: var(--muted);
   line-height: 1.3;
+  text-align: center;
 }
 .line-score {
   font-family: 'Cormorant Garamond', serif;
@@ -1268,8 +1272,6 @@ body {
 /* ── MOBILE OVERFLOW CONTAINMENT ── */
 @media (max-width: 520px) {
   .wrapper,
-  .pm-wrapper,
-  .pm-wrapper *,
   .matrix-grid,
   .lines-grid,
   .tabs-wrap,
@@ -1282,10 +1284,10 @@ body {
     gap: 5px;
   }
   .lines-grid {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 4px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
   }
-  .line-name { font-size: 7.5px; letter-spacing: .5px; }
+  .line-name { font-size: 9.5px; }
   .line-score { font-size: 22px; }
   .pm-wn-num { font-size: 20px; }
   .m-cell-digits { font-size: 20px; }
@@ -1386,6 +1388,35 @@ body {
 }
 
 
+
+/* ── LINES GRID MOBILE SAFE ── */
+.lines-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 7px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  overflow: visible !important;
+}
+.line-item {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  overflow: hidden;
+  word-break: break-word;
+}
+.line-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  white-space: normal;
+}
+.pm-wrapper .lines-section {
+  overflow: visible !important;
+  width: 100%;
+  box-sizing: border-box;
+}
+
 /* ── FOOTER ── */
   .matrix-footer {
     text-align:center;
@@ -1482,7 +1513,7 @@ body {
 .pm-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 7px 22px rgba(107,79,160,0.45); }
 
 /* Lines grid — compact card style */
-.pm-wrapper .lines-section { animation:fadeUp .5s .3s ease both; margin-bottom:10px; }
+.pm-wrapper .lines-section { animation:fadeUp .5s .3s ease both; margin-bottom:10px; overflow: visible; width: 100%; box-sizing: border-box; }
 .pm-wrapper .lines-title {
   font-family: 'Cormorant Garamond', serif;
   font-size: 16px; letter-spacing: 2px; text-transform: uppercase;
@@ -1490,29 +1521,33 @@ body {
 }
 .pm-wrapper .lines-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 5px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
   width: 100%;
   box-sizing: border-box;
+  overflow: visible;
 }
 .line-item {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 10px 8px;
-  text-align: center;
+  padding: 12px 10px;
   backdrop-filter: blur(8px);
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 5px;
+  text-align: center;
+  min-width: 0;
 }
 .line-name {
-  font-size: 8.5px;
-  letter-spacing: 1px;
+  font-size: 9.5px;
+  letter-spacing: 0.8px;
   text-transform: uppercase;
   color: var(--muted);
   line-height: 1.3;
+  text-align: center;
 }
 .line-score {
   font-family: 'Cormorant Garamond', serif;
@@ -1593,8 +1628,6 @@ body {
 /* ── MOBILE OVERFLOW CONTAINMENT ── */
 @media (max-width: 520px) {
   .wrapper,
-  .pm-wrapper,
-  .pm-wrapper *,
   .matrix-grid,
   .lines-grid,
   .tabs-wrap,
@@ -1607,10 +1640,10 @@ body {
     gap: 5px;
   }
   .lines-grid {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 4px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
   }
-  .line-name { font-size: 7.5px; letter-spacing: .5px; }
+  .line-name { font-size: 9.5px; }
   .line-score { font-size: 22px; }
   .pm-wn-num { font-size: 20px; }
   .m-cell-digits { font-size: 20px; }
@@ -1737,6 +1770,35 @@ body {
   line-height: 1.7;
 }
 
+
+
+/* ── LINES GRID MOBILE SAFE ── */
+.lines-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 7px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  overflow: visible !important;
+}
+.line-item {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  overflow: hidden;
+  word-break: break-word;
+}
+.line-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  white-space: normal;
+}
+.pm-wrapper .lines-section {
+  overflow: visible !important;
+  width: 100%;
+  box-sizing: border-box;
+}
 
 /* ── FOOTER ── */
 .footer {
@@ -2513,14 +2575,12 @@ function toggleFaq(item) {
   // ── Lines (classic layout 1,4,7/2,5,8/3,6,9)
   // Rows (horizontal), Columns (vertical), Diagonals
   const LINES = [
-    { label:'Целеустремлённость', cells:[1,4,7], type:'row' },
-    { label:'Семья',              cells:[2,5,8], type:'row' },
-    { label:'Привычки',           cells:[3,6,9], type:'row' },
-    { label:'Самооценка',         cells:[1,2,3], type:'col' },
-    { label:'Быт',                cells:[4,5,6], type:'col' },
-    { label:'Духовность',         cells:[7,8,9], type:'col' },
-    { label:'Воля',               cells:[1,5,9], type:'diag' },
-    { label:'Темперамент',        cells:[3,5,7], type:'diag' },
+    { label:'Целеустремлённость', cells:[1,4,7] },
+    { label:'Семья',              cells:[2,5,8] },
+    { label:'Привычки',           cells:[3,6,9] },
+    { label:'Быт',                cells:[4,5,6] },
+    { label:'Воля',               cells:[1,5,9] },
+    { label:'Темперамент',        cells:[3,5,7] },
   ];
 
   // ── Digit sum (single pass, no deep reduction)
